@@ -50,10 +50,19 @@ module.exports = {
             audio = bot.audio, client = bot.client;
             guild = message.guildId;
             try {
+                if (audio.get(guild) == undefined) {
+                    return [2, message.channel.send("No songs playing")];
+                }
                 songs = audio.get(guild).songs;
                 index = Number(args[0]);
                 if (Number.isNaN(index) === true) {
                     return [2, message.channel.send("Please enter a number")];
+                }
+                if (index <= 0) {
+                    return [2, message.channel.send("Enter a number greater than 0")];
+                }
+                if (index > songs.size) {
+                    return [2, message.channel.send("The number is too big")];
                 }
                 songs.delete(index);
                 for (i = index; i < songs.size; i++) {
@@ -64,7 +73,6 @@ module.exports = {
             }
             catch (err) {
                 console.log(err);
-                message.channel.send("No songs playing");
             }
             return [2];
         });
