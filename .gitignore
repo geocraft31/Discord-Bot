@@ -1,0 +1,9 @@
+node_modules/
+.vscode/
+.env
+Start.bat
+.mp3
+Initialize.ps1
+authorize.js
+discord_icon.png
+

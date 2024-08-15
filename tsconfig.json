@@ -1,0 +1,13 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "allowJs": false,
+        "target": "ES5",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "outDir": "dist",
+        "rootDir": "./src",
+        "removeComments": true
+    }
+}
