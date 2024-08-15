@@ -106,11 +106,11 @@ module.exports = {
         let raw_data = await searchYoutube(prompt);
         let yt_info: ytVideo = raw_data[0];
 
-        addSong(GuildAudio, yt_info);
-
-        if (yt_info.length.simpleText == undefined) {
+        if (yt_info.isLive) {
           yt_info.length = { simpleText: "Live", accessibility: {} };
         }
+
+        addSong(GuildAudio, yt_info);
 
         embed.setImage(yt_info.thumbnail.thumbnails[0].url);
         embed.setDescription(
@@ -133,11 +133,12 @@ module.exports = {
       if (yt_info == undefined) {
         return message.reply("No song found");
       }
-      addSong(GuildAudio, yt_info);
 
-      if (yt_info.length.simpleText == undefined) {
+      if (yt_info.isLive) {
         yt_info.length = { simpleText: "Live", accessibility: {} };
       }
+
+      addSong(GuildAudio, yt_info);
 
       // embed.setDescription(
       // "> **From: " +
@@ -176,9 +177,10 @@ module.exports = {
 };
 
 async function addSong(GuildAudio: AudioSettings, song: ytVideo) {
-  if (song.length.simpleText == undefined) {
+  if (song.length == undefined) {
     song.length = { simpleText: "Live", accessibility: {} };
   }
+
   var video_data = {
     title: song.title,
     url: `https://www.youtube.com/watch?v=${song.id}`,

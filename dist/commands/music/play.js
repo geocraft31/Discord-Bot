@@ -115,10 +115,10 @@ module.exports = {
                 case 3:
                     raw_data = _a.sent();
                     yt_info = raw_data[0];
-                    addSong(GuildAudio, yt_info);
-                    if (yt_info.length.simpleText == undefined) {
+                    if (yt_info.isLive) {
                         yt_info.length = { simpleText: "Live", accessibility: {} };
                     }
+                    addSong(GuildAudio, yt_info);
                     embed.setImage(yt_info.thumbnail.thumbnails[0].url);
                     embed.setDescription("**Added Song:** \n\n > **[".concat(yt_info.title, "](https://www.youtube.com/watch?v=").concat(yt_info.id, ")** \n  > **From: ").concat(yt_info.channelTitle, "\u2001|\u2001").concat(yt_info.length.simpleText, " **"));
                     embed.setColor(5763719);
@@ -131,10 +131,10 @@ module.exports = {
                     if (yt_info == undefined) {
                         return [2, message.reply("No song found")];
                     }
-                    addSong(GuildAudio, yt_info);
-                    if (yt_info.length.simpleText == undefined) {
+                    if (yt_info.isLive) {
                         yt_info.length = { simpleText: "Live", accessibility: {} };
                     }
+                    addSong(GuildAudio, yt_info);
                     embed.setImage(yt_info.thumbnail.thumbnails[0].url);
                     embed.setDescription("**Added Song:** \n\n > **[".concat(yt_info.title, "](https://www.youtube.com/watch?v=").concat(yt_info.id, ")** \n  > **From: ").concat(yt_info.channelTitle, "\u2001|\u2001").concat(yt_info.length.simpleText, " **"));
                     embed.setColor(5763719);
@@ -161,7 +161,7 @@ function addSong(GuildAudio, song) {
     return __awaiter(this, void 0, void 0, function () {
         var video_data, songs;
         return __generator(this, function (_a) {
-            if (song.length.simpleText == undefined) {
+            if (song.length == undefined) {
                 song.length = { simpleText: "Live", accessibility: {} };
             }
             video_data = {
