@@ -91,14 +91,21 @@ export const playSong = async (song: SongData, bot: Bot, guildID: string) => {
   let title = song.title,
     duration = song.duration,
     thumbnail = song.thumbnail,
-    url = song.url;
+    url = song.url,
+    channel = song.channel;
 
   const embed = new Builder.EmbedBuilder();
-  embed.setTitle(title);
-  embed.setDescription("`[ " + duration + " ]`");
-  embed.setThumbnail(thumbnail);
-  embed.setAuthor({ name: "Now Playing" });
-  embed.setURL(url);
+
+  embed.setImage(thumbnail);
+  embed.setDescription(
+    `**Now Playing:** \n\n > **[${title}](${url})** \n  > **From: ${channel} | ${duration} **`,
+  );
+
+  // embed.setTitle(title);
+  // embed.setDescription("`[ " + duration + " ]`");
+  // embed.setThumbnail(thumbnail);
+  // embed.setAuthor({ name: "Now Playing" });
+  // embed.setURL(url);
   embed.setColor(1752220);
 
   //const stream = await Play.stream(url);

@@ -83,7 +83,7 @@ module.exports = {
                         name: "Commands",
                         value: "```" + data[args[0]].join("  ") + "```",
                     });
-                    message.reply({ embeds: [Embed] });
+                    message.channel.send({ embeds: [Embed] });
                 }
                 else if (commands.includes(args[0])) {
                     category = Object.keys(data).find(function (key) {
@@ -118,7 +118,7 @@ module.exports = {
                         perms = "`None`";
                     }
                     Embed.addFields({ name: "Necessary permissions", value: perms });
-                    message.reply({ embeds: [Embed] });
+                    message.channel.send({ embeds: [Embed] });
                 }
             }
             else {
@@ -134,7 +134,7 @@ module.exports = {
                         categories.join("".concat("`", " \n ").concat("`").concat(prefix, "help ")) +
                         "`",
                 });
-                message.reply({ embeds: [Embed] });
+                message.channel.send({ embeds: [Embed] });
             }
             return [2];
         });

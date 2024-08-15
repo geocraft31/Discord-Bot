@@ -54,28 +54,27 @@ module.exports = {
                 songIndex = Number(args[0]);
                 songPos = Number(args[1]);
                 if (Number.isNaN(songIndex) === true || Number.isNaN(songPos) === true) {
-                    return [2, message.reply("Please enter two numbers")];
+                    return [2, message.channel.send("Please enter two numbers")];
                 }
                 if (songIndex > songs.size || songPos > songs.size) {
-                    return [2, message.reply("The number is too big")];
+                    return [2, message.channel.send("The number is too big")];
                 }
                 oldSong = songs.get(songPos);
                 movedSong = songs.get(songIndex);
                 songs.set(songPos, movedSong);
                 songs.set(songIndex, oldSong);
                 embed_1 = new Builder.EmbedBuilder();
-                embed_1.setTitle("Moved song: ".concat(movedSong.title, " to ").concat(songPos));
-                embed_1.setAuthor({ name: "Song moved" });
+                embed_1.setDescription("Moved song: ".concat(movedSong.title, " \n To position ").concat(songPos));
                 embed_1.setColor(15548997);
                 bot.client.channels
                     .fetch(audio.get(message.guildId).textChannelID)
                     .then(function (channel) {
                     channel.send({ embeds: [embed_1] });
                 });
-                message.reply("song moved");
+                message.channel.send("song moved");
             }
             catch (_b) {
-                message.reply("no song");
+                message.channel.send("no song");
             }
             return [2];
         });

@@ -137,17 +137,14 @@ var logger = function (type, name) {
 };
 exports.logger = logger;
 var playSong = function (song, bot, guildID) { return __awaiter(void 0, void 0, void 0, function () {
-    var channelID, audioPlayer, title, duration, thumbnail, url, embed, stream, ytdlStream, songResource;
+    var channelID, audioPlayer, title, duration, thumbnail, url, channel, embed, stream, ytdlStream, songResource;
     return __generator(this, function (_a) {
         channelID = bot.audio.get(guildID).textChannelID;
         audioPlayer = bot.audio.get(guildID).player;
-        title = song.title, duration = song.duration, thumbnail = song.thumbnail, url = song.url;
+        title = song.title, duration = song.duration, thumbnail = song.thumbnail, url = song.url, channel = song.channel;
         embed = new Builder.EmbedBuilder();
-        embed.setTitle(title);
-        embed.setDescription("`[ " + duration + " ]`");
-        embed.setThumbnail(thumbnail);
-        embed.setAuthor({ name: "Now Playing" });
-        embed.setURL(url);
+        embed.setImage(thumbnail);
+        embed.setDescription("**Now Playing:** \n\n > **[".concat(title, "](").concat(url, ")** \n  > **From: ").concat(channel, "\u2001|\u2001").concat(duration, " **"));
         embed.setColor(1752220);
         stream = new MyStream();
         ytdlStream = ytdl.exec(song.url, {

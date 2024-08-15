@@ -59,17 +59,16 @@ module.exports = {
                         songs.set(currentIndex, songs.get(randomIndex));
                         songs.set(randomIndex, temp);
                     }
-                    message.reply("Songs shifted");
+                    message.channel.send("Songs shuffled");
                 }
                 else {
-                    message.reply("Not enough songs to shuffle");
+                    message.channel.send("Not enough songs to shuffle");
                 }
             }
             catch (err) {
-                console.log(err, "Shuffle.js");
-                message.reply("No songs to shuffle");
+                message.channel.send("No songs to shuffle");
             }
             return [2];
         });
-    }); }
+    }); },
 };

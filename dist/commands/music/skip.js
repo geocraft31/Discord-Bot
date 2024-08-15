@@ -49,16 +49,17 @@ module.exports = {
         return __generator(this, function (_a) {
             audio = bot.audio;
             if (bot.audio.get(message.guildId) == undefined)
-                return [2, message.reply("No song to skip")];
+                return [2, message.channel.send("No song to skip")];
             try {
                 guildID = message.guildId;
                 audioPlayer = audio.get(guildID).player;
                 try {
                     audioPlayer.stop();
+                    message.channel.send("Song skiped");
                 }
                 catch (err) {
                     console.log(err);
-                    message.reply("error");
+                    message.channel.send("An error occuered");
                 }
             }
             catch (err) {

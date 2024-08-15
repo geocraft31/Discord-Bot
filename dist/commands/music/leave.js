@@ -51,15 +51,22 @@ module.exports = {
         return __generator(this, function (_a) {
             guildID = message.guildId;
             GuildAudio = bot.audio.get(guildID);
-            (0, functions_1.disconectBot)(bot, guildID);
             embed = new Builder.EmbedBuilder();
+            if (GuildAudio != undefined) {
+                (0, functions_1.disconectBot)(bot, guildID);
+            }
+            else {
+                return [2, message.channel.send("I am not in a voice channel")];
+            }
             embed.setTitle("I left the voice channel");
             embed.setAuthor({ name: "Disconnected" });
             embed.setColor(15548997);
-            bot.client.channels.fetch(GuildAudio.textChannelID).then(function (channel) {
+            bot.client.channels
+                .fetch(GuildAudio.textChannelID)
+                .then(function (channel) {
                 channel.send({ embeds: [embed] });
             });
             return [2];
         });
-    }); }
+    }); },
 };

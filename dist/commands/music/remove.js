@@ -53,20 +53,20 @@ module.exports = {
                 songs = audio.get(guild).songs;
                 index = Number(args[0]);
                 if (Number.isNaN(index) === true) {
-                    return [2, message.reply("Please enter a number")];
+                    return [2, message.channel.send("Please enter a number")];
                 }
                 songs.delete(index);
                 for (i = index; i < songs.size; i++) {
                     songs.set(i, songs.get(i + 1));
                     songs.delete(i + 1);
                 }
-                message.reply("song removed ");
+                message.channel.send("song removed ");
             }
             catch (err) {
                 console.log(err);
-                message.reply("No songs playing");
+                message.channel.send("No songs playing");
             }
             return [2];
         });
-    }); }
+    }); },
 };

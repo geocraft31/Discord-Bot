@@ -65,7 +65,12 @@ module.exports = {
                 board[row][column] = "b";
                 for (x = row - 1; x <= row + 1; x++) {
                     for (y = column - 1; y <= column + 1; y++) {
-                        if (x == row && y == column || x < 0 || y < 0 || x > 4 || y > 4 || board[x][y] == "b") {
+                        if ((x == row && y == column) ||
+                            x < 0 ||
+                            y < 0 ||
+                            x > 4 ||
+                            y > 4 ||
+                            board[x][y] == "b") {
                         }
                         else {
                             board[x][y] += 1;
@@ -109,8 +114,8 @@ module.exports = {
                 }
                 msg += "\n";
             }
-            message.reply(msg);
+            message.channel.send(msg);
             return [2];
         });
-    }); }
+    }); },
 };

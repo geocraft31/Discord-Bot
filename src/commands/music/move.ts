@@ -19,10 +19,10 @@ module.exports = {
       let songPos = Number(args[1]);
 
       if (Number.isNaN(songIndex) === true || Number.isNaN(songPos) === true) {
-        return message.reply("Please enter two numbers");
+        return message.channel.send("Please enter two numbers");
       }
       if (songIndex > songs.size || songPos > songs.size) {
-        return message.reply("The number is too big");
+        return message.channel.send("The number is too big");
       }
 
       let oldSong: SongData = songs.get(songPos);
@@ -31,8 +31,9 @@ module.exports = {
       songs.set(songIndex, oldSong);
 
       const embed = new Builder.EmbedBuilder();
-      embed.setTitle(`Moved song: ${movedSong.title} to ${songPos}`);
-      embed.setAuthor({ name: "Song moved" });
+      embed.setDescription(
+        `Moved song: ${movedSong.title} \n To position ${songPos}`,
+      );
       embed.setColor(15548997);
 
       bot.client.channels
@@ -40,9 +41,9 @@ module.exports = {
         .then((channel: Discord.TextChannel) => {
           channel.send({ embeds: [embed] });
         });
-      message.reply("song moved");
+      message.channel.send("song moved");
     } catch {
-      message.reply("no song");
+      message.channel.send("no song");
     }
   },
 };

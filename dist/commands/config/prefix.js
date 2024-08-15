@@ -51,17 +51,17 @@ module.exports = {
         var dataPath;
         return __generator(this, function (_a) {
             if (args.length > 1)
-                return [2, message.reply("Please only enter 1 prefix")];
+                return [2, message.channel.send("Please only enter 1 prefix")];
             else if (args.length == 0)
-                return [2, message.reply("Please provide a prefix")];
+                return [2, message.channel.send("Please provide a prefix")];
             guildData[message.guildId]["prefix"] = args[0];
             dataPath = path.resolve(__dirname, "../../data/guilds.json");
             fs.writeFile(dataPath, JSON.stringify(guildData), function (err) {
                 if (err)
                     console.log("error writing file:", err);
             });
-            message.reply("New prefix ".concat("`").concat(args[0]).concat("`", " applied"));
+            message.channel.send("New prefix ".concat("`").concat(args[0]).concat("`", " applied"));
             return [2];
         });
-    }); }
+    }); },
 };

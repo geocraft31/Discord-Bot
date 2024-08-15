@@ -1,5 +1,6 @@
 // TODO embed
 import Discord = require("discord.js");
+import Builder = require("@discordjs/builders");
 import { Bot } from "../../types";
 
 module.exports = {
@@ -12,17 +13,19 @@ module.exports = {
   devOnly: false,
   run: async (bot: Bot, message: Discord.Message, args) => {
     const { audio } = bot;
+
     if (bot.audio.get(message.guildId) == undefined)
-      return message.reply("No song to skip"); // TODO make embed
+      return message.channel.send("No song to skip"); // TODO make embed
 
     try {
       const guildID = message.guildId;
       const audioPlayer = audio.get(guildID).player;
       try {
         audioPlayer.stop();
+        message.channel.send("Song skiped");
       } catch (err) {
         console.log(err);
-        message.reply("error");
+        message.channel.send("An error occuered");
       }
     } catch (err) {
       console.log(err);

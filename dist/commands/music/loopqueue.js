@@ -49,14 +49,20 @@ module.exports = {
         return __generator(this, function (_a) {
             audio = bot.audio;
             try {
-                audio.get(message.guildId).loopqueue = !audio.get(message.guildId).loopqueue;
-                message.reply("Loop is ".concat(audio.get(message.guildId).loopqueue));
+                audio.get(message.guildId).loopqueue = !audio.get(message.guildId)
+                    .loopqueue;
+                if (audio.get(message.guildId).loopqueue) {
+                    message.channel.send("Loop is active");
+                }
+                else {
+                    message.channel.send("Loop is not active");
+                }
             }
             catch (err) {
                 console.error(err);
-                message.reply("No songs to loop throw, try adding some before running the command");
+                message.channel.send("No songs to loop through, try adding some before running the command");
             }
             return [2];
         });
-    }); }
+    }); },
 };

@@ -48,7 +48,7 @@ module.exports = {
           name: "Commands",
           value: "```" + data[args[0]].join("  ") + "```",
         });
-        message.reply({ embeds: [Embed] });
+        message.channel.send({ embeds: [Embed] });
       }
       // command
       else if (commands.includes(args[0])) {
@@ -88,7 +88,7 @@ module.exports = {
           perms = "`None`";
         }
         Embed.addFields({ name: "Necessary permissions", value: perms });
-        message.reply({ embeds: [Embed] });
+        message.channel.send({ embeds: [Embed] });
       }
     } else {
       // nothing
@@ -109,7 +109,7 @@ module.exports = {
           },
         );
 
-      message.reply({ embeds: [Embed] });
+      message.channel.send({ embeds: [Embed] });
     }
   },
 };

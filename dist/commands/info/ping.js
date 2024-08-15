@@ -42,15 +42,17 @@ module.exports = {
     permissions: [],
     alias: [],
     description: "Calculates `bot` and `API` latency",
-    example: "ping <command>",
+    example: "ping",
     devOnly: false,
     run: function (bot, message, args) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            message.reply("Calculating ping...").then(function (resultMessage) {
+            message.channel
+                .send("Calculating ping...")
+                .then(function (resultMessage) {
                 var ping = resultMessage.createdTimestamp - message.createdTimestamp;
                 resultMessage.edit("Bot latency: **".concat(ping, "**, API latency: **").concat(bot.client.ws.ping, "**"));
             });
             return [2];
         });
-    }); }
+    }); },
 };

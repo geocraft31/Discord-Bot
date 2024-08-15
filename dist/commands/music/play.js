@@ -107,11 +107,8 @@ module.exports = {
                     playlist.items.forEach(function (video) {
                         addSong(GuildAudio, video);
                     });
-                    embed.setTitle(playlist.metadata.playlistMetadataRenderer.title);
-                    embed.setDescription("`[ Videos: " + playlist.items.length + " ]`");
-                    embed.setThumbnail(playlist.items[0].thumbnail.thumbnails[0].url);
-                    embed.setAuthor({ name: "Added playlist " });
-                    embed.setURL(prompt);
+                    embed.setDescription("**Added Playlist:** \n\n > **[".concat(playlist.metadata.playlistMetadataRenderer.title, "](").concat(prompt, ")** \n > **Songs: ").concat(playlist.items.length, "**"));
+                    embed.setImage(playlist.items[0].thumbnail.thumbnails[0].url);
                     embed.setColor(5763719);
                     return [3, 4];
                 case 2: return [4, (0, functions_1.searchYoutube)(prompt)];
@@ -122,11 +119,8 @@ module.exports = {
                     if (yt_info.length.simpleText == undefined) {
                         yt_info.length = { simpleText: "Live", accessibility: {} };
                     }
-                    embed.setDescription("`[ " + yt_info.length.simpleText + " ]`");
-                    embed.setTitle(yt_info.title);
-                    embed.setThumbnail(yt_info.thumbnail.thumbnails[0].url);
-                    embed.setAuthor({ name: "Added video" });
-                    embed.setURL("https://www.youtube.com/watch?v=".concat(yt_info.id));
+                    embed.setImage(yt_info.thumbnail.thumbnails[0].url);
+                    embed.setDescription("**Added Song:** \n\n > **[".concat(yt_info.title, "](https://www.youtube.com/watch?v=").concat(yt_info.id, ")** \n  > **From: ").concat(yt_info.channelTitle, "\u2001|\u2001").concat(yt_info.length.simpleText, " **"));
                     embed.setColor(5763719);
                     _a.label = 4;
                 case 4: return [3, 7];
@@ -141,18 +135,17 @@ module.exports = {
                     if (yt_info.length.simpleText == undefined) {
                         yt_info.length = { simpleText: "Live", accessibility: {} };
                     }
-                    embed.setDescription("`[ " + yt_info.length.simpleText + " ]`");
-                    embed.setTitle(yt_info.title);
-                    embed.setThumbnail(yt_info.thumbnail.thumbnails[0].url);
-                    embed.setAuthor({ name: "Added song" });
-                    embed.setURL("https://www.youtube.com/watch?v=".concat(yt_info.id));
+                    embed.setImage(yt_info.thumbnail.thumbnails[0].url);
+                    embed.setDescription("**Added Song:** \n\n > **[".concat(yt_info.title, "](https://www.youtube.com/watch?v=").concat(yt_info.id, ")** \n  > **From: ").concat(yt_info.channelTitle, "\u2001|\u2001").concat(yt_info.length.simpleText, " **"));
                     embed.setColor(5763719);
                     _a.label = 7;
                 case 7:
                     bot.client.channels
                         .fetch(GuildAudio.textChannelID)
                         .then(function (channel) {
-                        channel.send({ embeds: [embed] });
+                        if (GuildAudio.songs.size > 1) {
+                            channel.send({ embeds: [embed] });
+                        }
                     });
                     if (audioPlayer.state.status == "idle") {
                         song = GuildAudio.songs.get(0);
