@@ -22,7 +22,11 @@ module.exports = {
       const audioPlayer = audio.get(guildID).player;
       try {
         audioPlayer.stop();
-        message.channel.send("Song skiped");
+        if (audio.get(guildID).songs.size < 2) {
+          message.channel.send("Song skiped");
+        } else {
+          message.react("👍");
+        }
       } catch (err) {
         console.log(err);
         message.channel.send("An error occuered");
