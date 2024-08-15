@@ -42,7 +42,8 @@ module.exports = {
         return __generator(this, function (_a) {
             console.log("Logged in as: \u001B[36m ".concat(bot.client.user.tag, "\u001B[0m \n"));
             bot.client.user.setActivity("?help");
+            bot.client.user.setStatus("invisible");
             return [2];
         });
-    }); }
+    }); },
 };

@@ -101,8 +101,12 @@ module.exports = {
 
         addSong(GuildAudio, yt_info);
 
+        if (yt_info.length.simpleText == undefined) {
+          yt_info.length = { simpleText: "Live", accessibility: {} };
+        }
+        embed.setDescription("`[ " + yt_info.length.simpleText + " ]`");
+
         embed.setTitle(yt_info.title);
-        embed.setDescription("`[ 00:00 | " + yt_info.length.simpleText + " ]`");
         embed.setThumbnail(yt_info.thumbnail.thumbnails[0].url);
         embed.setAuthor({ name: "Added video" });
         embed.setURL(`https://www.youtube.com/watch?v=${yt_info.id}`);
@@ -117,8 +121,12 @@ module.exports = {
       }
       addSong(GuildAudio, yt_info);
 
+      if (yt_info.length.simpleText == undefined) {
+        yt_info.length = { simpleText: "Live", accessibility: {} };
+      }
+
+      embed.setDescription("`[ " + yt_info.length.simpleText + " ]`");
       embed.setTitle(yt_info.title);
-      embed.setDescription("`[ 00:00 | " + yt_info.length.simpleText + " ]`");
       embed.setThumbnail(yt_info.thumbnail.thumbnails[0].url);
       embed.setAuthor({ name: "Added song" });
       embed.setURL(`https://www.youtube.com/watch?v=${yt_info.id}`);
@@ -140,6 +148,9 @@ module.exports = {
 };
 
 async function addSong(GuildAudio: AudioSettings, song: ytVideo) {
+  if (song.length.simpleText == undefined) {
+    song.length = { simpleText: "Live", accessibility: {} };
+  }
   var video_data = {
     title: song.title,
     url: `https://www.youtube.com/watch?v=${song.id}`,

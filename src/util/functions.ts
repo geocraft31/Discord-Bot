@@ -95,7 +95,7 @@ export const playSong = async (song: SongData, bot: Bot, guildID: string) => {
 
   const embed = new Builder.EmbedBuilder();
   embed.setTitle(title);
-  embed.setDescription("`[ 00:00 | " + duration + " ]`");
+  embed.setDescription("`[ " + duration + " ]`");
   embed.setThumbnail(thumbnail);
   embed.setAuthor({ name: "Now Playing" });
   embed.setURL(url);

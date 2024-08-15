@@ -119,8 +119,11 @@ module.exports = {
                     raw_data = _a.sent();
                     yt_info = raw_data[0];
                     addSong(GuildAudio, yt_info);
+                    if (yt_info.length.simpleText == undefined) {
+                        yt_info.length = { simpleText: "Live", accessibility: {} };
+                    }
+                    embed.setDescription("`[ " + yt_info.length.simpleText + " ]`");
                     embed.setTitle(yt_info.title);
-                    embed.setDescription("`[ 00:00 | " + yt_info.length.simpleText + " ]`");
                     embed.setThumbnail(yt_info.thumbnail.thumbnails[0].url);
                     embed.setAuthor({ name: "Added video" });
                     embed.setURL("https://www.youtube.com/watch?v=".concat(yt_info.id));
@@ -135,8 +138,11 @@ module.exports = {
                         return [2, message.reply("No song found")];
                     }
                     addSong(GuildAudio, yt_info);
+                    if (yt_info.length.simpleText == undefined) {
+                        yt_info.length = { simpleText: "Live", accessibility: {} };
+                    }
+                    embed.setDescription("`[ " + yt_info.length.simpleText + " ]`");
                     embed.setTitle(yt_info.title);
-                    embed.setDescription("`[ 00:00 | " + yt_info.length.simpleText + " ]`");
                     embed.setThumbnail(yt_info.thumbnail.thumbnails[0].url);
                     embed.setAuthor({ name: "Added song" });
                     embed.setURL("https://www.youtube.com/watch?v=".concat(yt_info.id));
@@ -162,6 +168,9 @@ function addSong(GuildAudio, song) {
     return __awaiter(this, void 0, void 0, function () {
         var video_data, songs;
         return __generator(this, function (_a) {
+            if (song.length.simpleText == undefined) {
+                song.length = { simpleText: "Live", accessibility: {} };
+            }
             video_data = {
                 title: song.title,
                 url: "https://www.youtube.com/watch?v=".concat(song.id),

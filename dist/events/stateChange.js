@@ -80,5 +80,5 @@ module.exports = {
                 case 2: return [2];
             }
         });
-    }); }
+    }); },
 };

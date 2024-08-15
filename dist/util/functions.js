@@ -144,7 +144,7 @@ var playSong = function (song, bot, guildID) { return __awaiter(void 0, void 0, 
         title = song.title, duration = song.duration, thumbnail = song.thumbnail, url = song.url;
         embed = new Builder.EmbedBuilder();
         embed.setTitle(title);
-        embed.setDescription("`[ 00:00 | " + duration + " ]`");
+        embed.setDescription("`[ " + duration + " ]`");
         embed.setThumbnail(thumbnail);
         embed.setAuthor({ name: "Now Playing" });
         embed.setURL(url);
